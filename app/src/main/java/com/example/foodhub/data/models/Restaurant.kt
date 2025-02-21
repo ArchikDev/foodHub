@@ -1,5 +1,7 @@
 package com.example.foodhub.data.models
 
+import kotlinx.serialization.Serializable
+
 data class Restaurant(
     val id: String,
     val name: String,
@@ -10,6 +12,7 @@ data class Restaurant(
     val categories: List<CategoryItem>,
 )
 
+@Serializable
 data class CategoryItem(
     val name: String
 )
