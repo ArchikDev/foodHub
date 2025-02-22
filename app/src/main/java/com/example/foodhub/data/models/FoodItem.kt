@@ -19,8 +19,6 @@ data class RestauranItem(
     val id: String,
     val name: String,
     val address: String,
-    val image_url: String,
     val latitude: String,
     val longitude: String,
-    val categories: List<CategoryItem>,
 )

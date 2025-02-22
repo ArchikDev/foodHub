@@ -1,5 +1,7 @@
 package com.example.foodhub.data
 
+import com.example.foodhub.data.models.AddToCartRequest
+import com.example.foodhub.data.models.AddToCartResponse
 import com.example.foodhub.data.models.AuthResponse
 import com.example.foodhub.data.models.Category
 import com.example.foodhub.data.models.FoodItemResponse
@@ -27,6 +29,9 @@ interface FoodApi {
 
     @GET("menu-Items/{restaurantId}/menu")
     suspend fun getFoodItemRestaurant(@Path("restaurantId") restaurantId: String): Response<FoodItemResponse>
+
+    @POST("cart")
+    suspend fun addToCart(@Body request: AddToCartRequest): Response<AddToCartResponse>
 
 //    @POST("/auth/oauth")
 //    suspend fun oAuth(@Body request: OAuthRequest): Response<AuthResponse>
