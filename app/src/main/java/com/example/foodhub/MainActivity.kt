@@ -105,11 +105,11 @@ class MainActivity : ComponentActivity() {
             FoodHubtrainingTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     val navController = rememberNavController()
-
+//                    session.storeToken("")
                     SharedTransitionLayout {
                         NavHost(
                             navController = navController,
-                            startDestination = if (session.getToken() != null) Home else AuthScreen,
+                            startDestination = if (session.getToken() != "") Home else AuthScreen,
                             modifier = Modifier.padding(innerPadding),
                             enterTransition = {
                                 slideIntoContainer(

@@ -11,7 +11,7 @@ data class FoodItem(
     val image_url: String,
     val name: String,
     val price: String,
-//    val restaurants: List<RestauranItem>,
+    val restaurantId: String,
 )
 
 @Serializable

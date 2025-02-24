@@ -1,5 +1,6 @@
 package com.example.foodhub.ui.features.food_item_details
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.foodhub.data.FoodApi
@@ -50,6 +51,7 @@ class FoodDetailsViewModel @Inject constructor(val foodApi: FoodApi): ViewModel(
                     quantity = quantity.value
                 ))
             }
+
             when(response) {
                 is ApiResponse.Success -> {
                     _uiState.value = FoodDetailsUiState.Nothing

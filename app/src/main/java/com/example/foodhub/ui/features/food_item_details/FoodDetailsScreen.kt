@@ -1,7 +1,5 @@
 package com.example.foodhub.ui.features.food_item_details
 
-import android.widget.Button
-import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
@@ -9,8 +7,6 @@ import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.content.MediaType.Companion.Image
-import androidx.compose.foundation.content.MediaType.Companion.Text
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -145,7 +141,7 @@ fun SharedTransitionScope.FoodDetailsScreen(
         Button(
             onClick = {
                 viewModel.addToCart(
-                    restaurantId = foodItem.id,
+                    restaurantId = foodItem.restaurantId,
                     foodItemId = foodItem.id
                 )
             },
