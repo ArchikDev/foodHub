@@ -35,10 +35,12 @@ import com.example.foodhub.data.models.FoodItem
 import com.example.foodhub.ui.features.auth.AuthScreen
 import com.example.foodhub.ui.features.auth.login.SignInScreen
 import com.example.foodhub.ui.features.auth.signup.SignUpScreen
+import com.example.foodhub.ui.features.cart.CartScreen
 import com.example.foodhub.ui.features.food_item_details.FoodDetailsScreen
 import com.example.foodhub.ui.features.home.HomeScreen
 import com.example.foodhub.ui.features.restaurant_details.RestaurantDetailsScreen
 import com.example.foodhub.ui.navigation.AuthScreen
+import com.example.foodhub.ui.navigation.Cart
 import com.example.foodhub.ui.navigation.FoodDetails
 import com.example.foodhub.ui.navigation.Home
 import com.example.foodhub.ui.navigation.Login
@@ -188,6 +190,9 @@ class MainActivity : ComponentActivity() {
                                     foodItem = route.foodItem,
                                     this
                                 )
+                            }
+                            composable<Cart>() {
+                                CartScreen(navController)
                             }
                         }
                     }

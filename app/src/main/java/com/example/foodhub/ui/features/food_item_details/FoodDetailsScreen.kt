@@ -39,6 +39,7 @@ import com.example.foodhub.data.models.FoodItem
 import com.example.foodhub.ui.BasicDialog
 import com.example.foodhub.ui.features.restaurant_details.RestaurantDetails
 import com.example.foodhub.ui.features.restaurant_details.RestaurantDetailsHeader
+import com.example.foodhub.ui.navigation.Cart
 import kotlinx.coroutines.flow.collectLatest
 
 @OptIn(ExperimentalSharedTransitionApi::class, ExperimentalMaterial3Api::class)
@@ -83,7 +84,7 @@ fun SharedTransitionScope.FoodDetailsScreen(
                     showErrorDialog.value = true
                 }
                 is FoodDetailsViewModel.FoodDetailsEvent.goToCart -> {
-//                    navController.navigate("cart")
+                    navController.navigate(Cart)
                 }
             }
         }
@@ -117,25 +118,15 @@ fun SharedTransitionScope.FoodDetailsScreen(
                 style = MaterialTheme.typography.headlineLarge
             )
             Spacer(modifier = Modifier.weight(1f))
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Image(
-                    painter = painterResource(id = R.drawable.add),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .clip(CircleShape)
-                        .clickable { viewModel.incrementQuantity() }
-                )
-                Spacer(modifier = Modifier.size(8.dp))
-                Text(text = "${count.value}", style = MaterialTheme.typography.titleMedium)
-                Spacer(modifier = Modifier.size(8.dp))
-                Image(
-                    painter = painterResource(id = R.drawable.minus),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .clip(CircleShape)
-                        .clickable { viewModel.decrementQuantity() }
-                )
-            }
+            FoodItemCounter(
+                onCounterIncrement = {
+                    viewModel.incrementQuantity()
+                },
+                onCounterDecrement = {
+                    viewModel.decrementQuantity()
+                },
+                count = count.value
+            )
         }
         Spacer(modifier = Modifier.weight(1f))
         Button(
@@ -180,19 +171,23 @@ fun SharedTransitionScope.FoodDetailsScreen(
             ) {
                 Text(
                     text = "Item added to cart",
-                    style = MaterialTheme.typography.headlineMedium
+                    style = MaterialTheme.typography.titleLarge
                 )
                 Spacer(modifier = Modifier.size(16.dp))
                 Button(onClick = {
                     showSuccessDialog.value = false
                     viewModel.goToCart()
-                }, modifier = Modifier.padding(horizontal = 16.dp).fillMaxWidth()) {
+                }, modifier = Modifier
+                    .padding(horizontal = 16.dp)
+                    .fillMaxWidth()) {
                     Text(text = "Go to Cart")
                 }
 
                 Button(onClick = {
                     showSuccessDialog.value = false
-                }, modifier = Modifier.padding(horizontal = 16.dp).fillMaxWidth()) {
+                }, modifier = Modifier
+                    .padding(horizontal = 16.dp)
+                    .fillMaxWidth()) {
                     Text(text = "OK")
                 }
             }
@@ -209,5 +204,28 @@ fun SharedTransitionScope.FoodDetailsScreen(
                 showErrorDialog.value = false
             }
         }
+    }
+}
+
+@Composable
+fun FoodItemCounter(onCounterIncrement: () -> Unit, onCounterDecrement: () -> Unit, count: Int) {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Image(
+            painter = painterResource(id = R.drawable.add),
+            contentDescription = null,
+            modifier = Modifier
+                .clip(CircleShape)
+                .clickable { onCounterIncrement.invoke() }
+        )
+        Spacer(modifier = Modifier.size(8.dp))
+        Text(text = "${count}", style = MaterialTheme.typography.titleMedium)
+        Spacer(modifier = Modifier.size(8.dp))
+        Image(
+            painter = painterResource(id = R.drawable.minus),
+            contentDescription = null,
+            modifier = Modifier
+                .clip(CircleShape)
+                .clickable { onCounterDecrement.invoke() }
+        )
     }
 }
